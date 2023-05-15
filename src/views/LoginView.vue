@@ -16,10 +16,10 @@ const login = () => {
 
 <template>
   <h1>Login</h1>
-  <input type="text" placeholder="email" v-model="email"> <br>
-  <input type="password" placeholder="password" v-model="password"> <br>
+  <input id="email" type="text" placeholder="email" v-model="email"> <br>
+  <input id="password" type="password" placeholder="password" v-model="password"> <br>
   <button @click="login()">Login</button>
-  <div v-if="error">
+  <div v-if="!error">
     <p>Wrong email or password</p>
   </div>
 </template>
