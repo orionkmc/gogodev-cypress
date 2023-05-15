@@ -5,20 +5,14 @@ describe('Login Test Feature', () => {
   })
 
   it('user with wrong credentials can not pass', () => {
-    cy.visit('/login')
-    cy.get('#email').type('demo@demo.com')
-    cy.get('#password').type('987654')
-    cy.get('button').click()
+    cy.login('demo@demo.com', '987654')
     cy.contains('p', 'Wrong email or password')
     cy.visit('/')
     cy.url().should('eq', 'http://localhost:8081/login')
   })
 
   it('user can successfully login', () => {
-    cy.visit('/login')
-    cy.get('#email').type('admin@admin.com')
-    cy.get('#password').type('12345678')
-    cy.get('button').click()
+    cy.login('admin@admin.com', '12345678')
     cy.url().should('eq', 'http://localhost:8081/')
   })
 })
