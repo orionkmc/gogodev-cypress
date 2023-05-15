@@ -1,18 +1,20 @@
-<template>
-  <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js + TypeScript App"/>
-  </div>
-</template>
+<script lang="ts" setup>
+import PostService from '@/services/PostService'
+import { onMounted } from 'vue'
 
-<script lang="ts">
-import { defineComponent } from 'vue'
-import HelloWorld from '@/components/HelloWorld.vue' // @ is an alias to /src
+const postService = new PostService()
+const posts = postService.getPosts()
 
-export default defineComponent({
-  name: 'HomeView',
-  components: {
-    HelloWorld
-  }
+onMounted(async () => {
+  await postService.fetchAll()
 })
 </script>
+
+<template>
+  <h1>Post list</h1>
+  <ul>
+    <li v-for="post in posts" :key="post.id">
+      <RouterLink :to="{name: 'detail', params: {id:post.id}}">{{ post.title }}</RouterLink>
+    </li>
+  </ul>
+</template>
